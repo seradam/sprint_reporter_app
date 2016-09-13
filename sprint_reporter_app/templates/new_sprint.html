@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>new sprint</title>
+</head>
+<body>
+    <p>Create a new sprint.</p>
+    {% if data %}
+    <form action="{{ url_for('update')}}" method='post'>
+    {% else %}
+    <form action="{{ url_for('new_sprint')}}" method='post'>
+    {% endif %}
+        <input type ="text" name="title" {% if data %} value="{{ data.title}}" {% endif %}>
+        <input type ="text" name="story" {% if data %} value="{{ data.user_story}}" {% endif %}>
+        <input type ="text" name="criteria" {% if data %} value="{{ data.criteria}}" {% endif %}>
+        <input type ="number" name="value" step="100" min="100" max="1500" {% if data %} value="{{ data.business_value}}" {% endif %}>
+        <input type ="number" name="time" step="0.5" min="0.5" max="40" {% if data %} value="{{ data.estimation}}" {% endif %}>
+        <select name="status" {% if data %} value="{{ data.status}}" {% endif %}>
+          <option value="Planning">Planning</option>
+          <option value="To Do">To Do</option>
+          <option value="In Progress">In progress</option>
+          <option value="Review">Review</option>
+          <option value="Done">Done</option>
+        </select>
+        {% if data %}
+        <input type="hidden" name="sprint_id" value="{{ data.sprint_id }}">
+        <input type="submit" value="update">
+        {% else %}
+        <input type="submit" value="create">
+        {% endif %}
+    </form>
+</body>
+</html>

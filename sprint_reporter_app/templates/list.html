@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>list</title>
+</head>
+<body>
+    <table>
+        {% for sprint in sprints %}
+        <tr>
+            <td>{{ sprint.title }}</td>
+            <td>{{ sprint.user_story }}</td>
+            <td>{{ sprint.acceptance_criteria }}</td>
+            <td>{{ sprint.business_value }}</td>
+            <td>{{ sprint.estimation }}</td>
+            <td>{{ sprint.status }}</td>
+            <td>
+                <form action="{{ url_for('delete_sprint') }}" method='post'>
+                    <input type="hidden" name="sprint_id" value="{{ sprint.sprint_id }}">
+                    <input type="submit" value="delete">
+                </form>
+            </td>
+            <td>
+                <form action="{{ url_for('update_sprint', sprintname=sprint.sprint_id) }}" method='post'>
+                    <input type="hidden" name="sprint_id" value="{{ sprint.sprint_id }}">
+                    <input type="submit" value="update">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
